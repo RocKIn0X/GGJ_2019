@@ -26,7 +26,14 @@ public class BetterJump : MonoBehaviour
         }
         else
         {
-            rb.gravityScale = normalGravityScale;
+            if (!GetComponent<PlayerController>().IsOnLadder)
+            {
+                rb.gravityScale = normalGravityScale;
+            }
+            else
+            {
+                rb.gravityScale = 0;
+            }
         }
     }
 }
