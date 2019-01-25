@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
     private float groundedSkin = 0.05f;
     [SerializeField]
     private float distanceToLadder = 0.6f;
+    [SerializeField]
+    private float climbingOffset = 0.1f;
 
     public bool IsOnLadder { get; set; }
     public float screenPadding;
@@ -63,6 +65,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isOnGround)
+        {
+            IsOnLadder = false;
+        }
+
         if (Input.GetKeyDown(KeyCode.Space) && (isOnGround || IsOnLadder))
         {
             jumpRequest = true;
@@ -82,55 +89,9 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(0, rb.velocity.y);
         }
         Flip(dirHorizontal);
-
-        RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, Vector2.up, distanceToLadder, whatIsLadder);
-
-        if (hitInfo.collider != null)
-        {
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                IsOnLadder = true;
-                transform.position = new Vector3(hitInfo.collider.transform.position.x, transform.position.y, transform.position.z);
-            }
-        }
-        else
-        {
-            IsOnLadder = false;
-        }
-
-        float dirVertical;
-
-        if (IsOnLadder == true)
-        {
-            dirVertical = Input.GetAxisRaw("Vertical");
-            rb.velocity = new Vector2(rb.velocity.x, dirVertical * 5);
-            rb.gravityScale = 0;
-        }
-        else
-        {
-            rb.gravityScale = 3;
-        }
-
-        if (jumpRequest)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            isOnGround = false;
-            jumpRequest = false;
-        }
-        else
-        {
-            Vector2 boxCenter = ((Vector2)transform.position + playerBoxOffset) + Vector2.down * (playerSize.y + boxSize.y) * 0.5f;
-            isOnGround = (Physics2D.OverlapBox(boxCenter, boxSize, 0f, groundLayer) != null);
-        }
-
-        if (!IsOnLadder)
-        {
-            transform.position = new Vector3(Mathf.Clamp(transform.position.x, xScreenMin, xScreenMax), transform.position.y, transform.position.z);
-        }
-        else
-        {
-
-        }
+        Climbing();
+        Jumping();
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, xScreenMin, xScreenMax), transform.position.y, transform.position.z);
     }
 
     void SetPositionNotOverViewPort()
@@ -152,6 +113,56 @@ public class PlayerController : MonoBehaviour
             Vector2 playerScale = transform.localScale;
             playerScale.x *= -1;
             transform.localScale = playerScale;
+        }
+    }
+
+    void Climbing ()
+    {
+        CheckLadderFromRay();
+
+        float dirVertical = Input.GetAxisRaw("Vertical");
+
+        if (IsOnLadder == true)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, dirVertical * 5);
+            rb.gravityScale = 0;
+        }
+        else
+        {
+            rb.gravityScale = 3;
+        }
+    }
+
+    void CheckLadderFromRay ()
+    {
+        RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, Vector2.up, distanceToLadder, whatIsLadder);
+
+        if (hitInfo.collider != null)
+        {
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                IsOnLadder = true;
+                transform.position = new Vector3(hitInfo.collider.transform.position.x, transform.position.y + climbingOffset, transform.position.z);
+            }
+        }
+        else
+        {
+            IsOnLadder = false;
+        }
+    }
+
+    void Jumping ()
+    {
+        if (jumpRequest)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            isOnGround = false;
+            jumpRequest = false;
+        }
+        else
+        {
+            Vector2 boxCenter = ((Vector2)transform.position + playerBoxOffset) + Vector2.down * (playerSize.y + boxSize.y) * 0.5f;
+            isOnGround = (Physics2D.OverlapBox(boxCenter, boxSize, 0f, groundLayer) != null);
         }
     }
 }
