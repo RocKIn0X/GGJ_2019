@@ -20,12 +20,15 @@ public class PlayerController : MonoBehaviour
     private Vector2 playerBoxOffset;
     [SerializeField]
     private float groundedSkin = 0.05f;
+    [SerializeField]
+    private float distanceToLadder = 0.6f;
 
     public bool IsOnLadder { get; set; }
     public float screenPadding;
     public float speedX;
     public float jumpForce;
     public LayerMask groundLayer;
+    public LayerMask whatIsLadder;
 
     #region Singleton Object
     public static PlayerController instance = null;
@@ -60,19 +63,54 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isOnGround)
+        if (Input.GetKeyDown(KeyCode.Space) && (isOnGround || IsOnLadder))
         {
             jumpRequest = true;
+            IsOnLadder = false;
         }
     }
 
     void FixedUpdate()
     {
         float dirHorizontal = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector2(dirHorizontal * speedX, rb.velocity.y);
+        if (!IsOnLadder)
+        {
+            rb.velocity = new Vector2(dirHorizontal * speedX, rb.velocity.y);
+        }
+        else
+        {
+            rb.velocity = new Vector2(0, rb.velocity.y);
+        }
         Flip(dirHorizontal);
-        transform.position = new Vector3(Mathf.Clamp(transform.position.x, xScreenMin, xScreenMax), transform.position.y, transform.position.z);
-        
+
+        RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, Vector2.up, distanceToLadder, whatIsLadder);
+
+        if (hitInfo.collider != null)
+        {
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                IsOnLadder = true;
+                transform.position = new Vector3(hitInfo.collider.transform.position.x, transform.position.y, transform.position.z);
+            }
+        }
+        else
+        {
+            IsOnLadder = false;
+        }
+
+        float dirVertical;
+
+        if (IsOnLadder == true)
+        {
+            dirVertical = Input.GetAxisRaw("Vertical");
+            rb.velocity = new Vector2(rb.velocity.x, dirVertical * 5);
+            rb.gravityScale = 0;
+        }
+        else
+        {
+            rb.gravityScale = 3;
+        }
+
         if (jumpRequest)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
@@ -83,6 +121,15 @@ public class PlayerController : MonoBehaviour
         {
             Vector2 boxCenter = ((Vector2)transform.position + playerBoxOffset) + Vector2.down * (playerSize.y + boxSize.y) * 0.5f;
             isOnGround = (Physics2D.OverlapBox(boxCenter, boxSize, 0f, groundLayer) != null);
+        }
+
+        if (!IsOnLadder)
+        {
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x, xScreenMin, xScreenMax), transform.position.y, transform.position.z);
+        }
+        else
+        {
+
         }
     }
 

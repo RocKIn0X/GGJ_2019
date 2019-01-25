@@ -122,7 +122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4014205}
   - component: {fileID: 4014206}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ladder_Tile (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1228,7 +1228,7 @@ GameObject:
   m_Component:
   - component: {fileID: 168488954}
   - component: {fileID: 168488955}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ladder_Tile (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2469,12 +2469,16 @@ MonoBehaviour:
   isOnGround: 0
   jumpRequest: 0
   groundedSkin: 0.05
+  distanceToLadder: 0.6
   screenPadding: 0.5
   speedX: 7
   jumpForce: 15
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
+  whatIsLadder:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!114 &319808430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2482,7 +2486,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 319808424}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30b7805518c5619469719b191d404297, type: 3}
   m_Name: 
@@ -3920,7 +3924,7 @@ GameObject:
   m_Component:
   - component: {fileID: 596699853}
   - component: {fileID: 596699854}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ladder_Tile (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5751,7 +5755,7 @@ GameObject:
   m_Component:
   - component: {fileID: 886898820}
   - component: {fileID: 886898821}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ladder_Tile (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7252,7 +7256,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1130601911}
   - component: {fileID: 1130601912}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ladder_Tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7489,7 +7493,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1143979619}
   - component: {fileID: 1143979620}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ladder_Tile (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9385,8 +9389,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1319611101}
   - component: {fileID: 1319611100}
-  - component: {fileID: 1319611102}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ladder
   m_TagString: Ladder
   m_Icon: {fileID: 0}
@@ -9442,19 +9445,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1319611102
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1319611099}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a672e329ae5f9904ea84814f483ebf97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  climbSpeed: 5
 --- !u!1 &1324447561
 GameObject:
   m_ObjectHideFlags: 0
@@ -9465,7 +9455,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1324447562}
   - component: {fileID: 1324447563}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ladder_Tile (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11486,7 +11476,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1548866493}
   - component: {fileID: 1548866494}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ladder_Tile (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14567,7 +14557,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2028586278}
   - component: {fileID: 2028586279}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ladder_Tile (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
