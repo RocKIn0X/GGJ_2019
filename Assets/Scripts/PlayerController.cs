@@ -5,7 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-
     private bool faceRight;
     [SerializeField]
     private bool isOnGround;
@@ -22,23 +21,35 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float groundedSkin = 0.05f;
 
+    public bool IsOnLadder { get; set; }
     public float screenPadding;
     public float speedX;
     public float jumpForce;
     public LayerMask groundLayer;
 
+    #region Singleton Object
+    public static PlayerController instance = null;
+
     void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        if (instance != null)
+        {
+            return;
+        }
+
+        instance = this;
     }
+    #endregion
 
     // Start is called before the first frame update
     void Start()
     {
         faceRight = true;
         isOnGround = false;
+        IsOnLadder = false;
         jumpRequest = false;
 
+        rb = GetComponent<Rigidbody2D>();
         playerBox = GetComponent<BoxCollider2D>();
         playerSize = playerBox.size;
         playerBoxOffset = playerBox.offset;
