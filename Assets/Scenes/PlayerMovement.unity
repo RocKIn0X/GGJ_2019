@@ -1309,6 +1309,7 @@ GameObject:
   - component: {fileID: 319808426}
   - component: {fileID: 319808425}
   - component: {fileID: 319808429}
+  - component: {fileID: 319808430}
   - component: {fileID: 319808428}
   m_Layer: 0
   m_Name: Player_Temp
@@ -1442,11 +1443,24 @@ MonoBehaviour:
   jumpRequest: 0
   groundedSkin: 0.05
   screenPadding: 0.5
-  speedX: 5
+  speedX: 7
   jumpForce: 15
   groundLayer:
     serializedVersion: 2
     m_Bits: 256
+--- !u!114 &319808430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319808424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30b7805518c5619469719b191d404297, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fallGravityScale: 5
 --- !u!1 &353721159
 GameObject:
   m_ObjectHideFlags: 0
