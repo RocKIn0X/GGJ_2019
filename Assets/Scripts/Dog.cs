@@ -141,6 +141,17 @@ public class Dog : MonoBehaviour
         }
     }
 
+    void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Warp"))
+        {
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                this.transform.position = collision.GetComponent<WarpHole>().GetDestination();
+            }
+        }
+    }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
