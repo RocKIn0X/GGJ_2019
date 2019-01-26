@@ -5,13 +5,28 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Dog : MonoBehaviour
 {
+    [System.Serializable]
+    public enum DogState
+    {
+        STAND,
+        FOLLOW,
+        SIT
+    }
+
     private Animator anim;
     [SerializeField]
     private float speed;
+    [SerializeField]
+    private float distanceToPlayer = 1f;
+    private float direction;
     private bool faceRight;
+    private bool isSit;
     private Rigidbody2D rb;
     private Transform target;
     private bool isFollow;
+
+    public LayerMask whatIsPlayer;
+    public DogState state;
 
     #region Singleton Object
     public static Dog instance = null;
@@ -32,31 +47,51 @@ public class Dog : MonoBehaviour
     {
         faceRight = true;
         isFollow = true;
+        isSit = false;
+        state = DogState.STAND;
 
         anim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
         target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        float direction = target.position.x - transform.position.x;
+        direction = (target.position.x - transform.position.x) > 0f ? 1 : -1;
 
+        /*
         if (isFollow)
         {
+            Debug.Log("Follow");
             MoveToTarget();
             Flip(direction);
         } 
+        */
+
+        switch (state)
+        {
+            case DogState.STAND:
+                CheckPlayerFromRay();
+                break;
+            case DogState.FOLLOW:
+                MoveToTarget();
+                Flip(direction);
+                CheckPlayerFromRay();
+                break;
+            case DogState.SIT:
+                break;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        
     }
 
     void MoveToTarget()
     {
         transform.position = Vector2.MoveTowards(transform.position, new Vector2(target.position.x, transform.position.y), speed * Time.deltaTime);
-    }
-
-    void StopMove ()
-    {
-        target.position = transform.position;
     }
 
     void Flip(float dirHorizontal)
@@ -71,19 +106,43 @@ public class Dog : MonoBehaviour
         }
     }
 
-    public void Command ()
+    void CheckPlayerFromRay()
     {
-        if (isFollow)
+        RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, new Vector2(direction, 0), distanceToPlayer, whatIsPlayer);
+        if (hitInfo.collider != null)
         {
-            anim.SetTrigger("SitCommand");
-            Debug.Log("Stop Follow");
+            isFollow = false;
+            state = DogState.STAND;
+            anim.SetBool("Follow", isFollow);
         }
         else
         {
-            anim.SetTrigger("Follow");
-            Debug.Log("Continue Follow");
+            isFollow = true;
+            state = DogState.FOLLOW;
+            anim.SetBool("Follow", isFollow);
         }
-        isFollow = !isFollow;
+    }
+
+    public void Command (Transform _target)
+    {
+        if (isFollow)
+        {
+            Debug.Log("Stop Follow");
+            state = DogState.SIT;
+            isFollow = false;
+            anim.SetBool("Follow", isFollow);
+            rb.velocity = Vector2.zero;
+            anim.SetTrigger("SitCommand");
+        }
+        else
+        {
+            Debug.Log("Continue Follow");
+            target = _target;
+            state = DogState.FOLLOW;
+            //MoveToTarget();
+            isFollow = true;
+            anim.SetBool("Follow", isFollow);
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)

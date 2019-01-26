@@ -66,6 +66,11 @@ public class PlayerController : MonoBehaviour
         playerSize = playerBox.size;
         playerBoxOffset = playerBox.offset;
         boxSize = new Vector2(playerSize.x, groundedSkin);
+        //marker.SetActive(false);
+        Color tmp = marker.GetComponent<SpriteRenderer>().color;
+        tmp.a = 0f;
+        marker.GetComponent<SpriteRenderer>().color = tmp;
+
         SetPositionNotOverViewPort();
     }
 
@@ -181,6 +186,20 @@ public class PlayerController : MonoBehaviour
 
     void Command ()
     {
-        Dog.instance.Command();
+        marker.transform.position = transform.position;
+        Dog.instance.Command(marker.transform);
+
+        if (Dog.instance.state == Dog.DogState.FOLLOW)
+        {
+            Color tmp = marker.GetComponent<SpriteRenderer>().color;
+            tmp.a = 1f;
+            marker.GetComponent<SpriteRenderer>().color = tmp;
+        }
+        else
+        {
+            Color tmp = marker.GetComponent<SpriteRenderer>().color;
+            tmp.a = 0f;
+            marker.GetComponent<SpriteRenderer>().color = tmp;
+        }
     }
 }
