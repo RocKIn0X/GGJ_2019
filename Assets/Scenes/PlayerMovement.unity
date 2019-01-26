@@ -8607,6 +8607,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1226662885 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2669958290153084856, guid: f6f0baa5785bdb04fb1c1ab83e8a6a2c,
+    type: 3}
+  m_PrefabInstance: {fileID: 2669958290133006057}
+  m_PrefabAsset: {fileID: 0}
+--- !u!111 &1226662892
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1226662885}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: ace04850ccfdb4743b551abc3acf738d, type: 2}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1232033219
 GameObject:
   m_ObjectHideFlags: 0
@@ -15860,7 +15881,7 @@ PrefabInstance:
     - target: {fileID: 2669958290153084858, guid: f6f0baa5785bdb04fb1c1ab83e8a6a2c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.5
+      value: -4.52
       objectReference: {fileID: 0}
     - target: {fileID: 2669958290153084858, guid: f6f0baa5785bdb04fb1c1ab83e8a6a2c,
         type: 3}
