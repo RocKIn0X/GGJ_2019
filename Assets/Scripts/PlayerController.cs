@@ -90,7 +90,10 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            Command();
+            if (Dog.instance != null)
+            {
+                Command();
+            }
         }
     }
 
