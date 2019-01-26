@@ -37,6 +37,7 @@ public class MovingBlock : MonoBehaviour
         {
             isTriggered = false;
         }
+        Physics2D.IgnoreLayerCollision(8, 8);
     }
     void FixedUpdate()
     {
