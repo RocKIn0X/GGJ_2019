@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +14,8 @@ public class PlayerController : MonoBehaviour
     private float xScreenMin;
     private float xScreenMax;
 
+    private Animator anim;
+    private Dog dog;
     private Rigidbody2D rb;
     private BoxCollider2D playerBox;
     private Vector2 playerSize;
@@ -29,8 +32,10 @@ public class PlayerController : MonoBehaviour
     public float screenPadding;
     public float speedX;
     public float jumpForce;
+    public GameObject marker;
     public LayerMask groundLayer;
     public LayerMask whatIsLadder;
+    public Vector3 markerPosition { get; set; }
 
     #region Singleton Object
     public static PlayerController instance = null;
@@ -54,11 +59,18 @@ public class PlayerController : MonoBehaviour
         IsOnLadder = false;
         jumpRequest = false;
 
+        anim = GetComponent<Animator>();
+        //dog = GameObject.FindGameObjectWithTag("Dog").GetComponent<Dog>();
         rb = GetComponent<Rigidbody2D>();
         playerBox = GetComponent<BoxCollider2D>();
         playerSize = playerBox.size;
         playerBoxOffset = playerBox.offset;
         boxSize = new Vector2(playerSize.x, groundedSkin);
+        //marker.SetActive(false);
+        Color tmp = marker.GetComponent<SpriteRenderer>().color;
+        tmp.a = 0f;
+        marker.GetComponent<SpriteRenderer>().color = tmp;
+
         SetPositionNotOverViewPort();
     }
 
@@ -75,11 +87,17 @@ public class PlayerController : MonoBehaviour
             jumpRequest = true;
             IsOnLadder = false;
         }
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            Command();
+        }
     }
 
     void FixedUpdate()
     {
         float dirHorizontal = Input.GetAxis("Horizontal");
+        anim.SetFloat("SpeedX", Math.Abs(dirHorizontal));
         if (!IsOnLadder)
         {
             rb.velocity = new Vector2(dirHorizontal * speedX, rb.velocity.y);
@@ -88,6 +106,14 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = new Vector2(0, rb.velocity.y);
         }
+
+        Debug.Log(rb.velocity.y);
+        if (rb.velocity.y < -0.1f)
+        {
+            anim.SetBool("Jumping", false);
+        }
+        anim.SetFloat("SpeedY", rb.velocity.y);
+
         Flip(dirHorizontal);
         Climbing();
         Jumping();
@@ -155,6 +181,7 @@ public class PlayerController : MonoBehaviour
     {
         if (jumpRequest)
         {
+            anim.SetBool("Jumping", jumpRequest);
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             isOnGround = false;
             jumpRequest = false;
@@ -163,6 +190,26 @@ public class PlayerController : MonoBehaviour
         {
             Vector2 boxCenter = ((Vector2)transform.position + playerBoxOffset) + Vector2.down * (playerSize.y + boxSize.y) * 0.5f;
             isOnGround = (Physics2D.OverlapBox(boxCenter, boxSize, 0f, groundLayer) != null);
+            anim.SetBool("IsOnGround", isOnGround);
+        }
+    }
+
+    void Command ()
+    {
+        marker.transform.position = transform.position;
+        Dog.instance.Command(marker.transform);
+
+        if (Dog.instance.state == Dog.DogState.FOLLOW)
+        {
+            Color tmp = marker.GetComponent<SpriteRenderer>().color;
+            tmp.a = 1f;
+            marker.GetComponent<SpriteRenderer>().color = tmp;
+        }
+        else
+        {
+            Color tmp = marker.GetComponent<SpriteRenderer>().color;
+            tmp.a = 0f;
+            marker.GetComponent<SpriteRenderer>().color = tmp;
         }
     }
 }
