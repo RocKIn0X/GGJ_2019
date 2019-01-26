@@ -67,10 +67,12 @@ public class PlayerController : MonoBehaviour
         playerBoxOffset = playerBox.offset;
         boxSize = new Vector2(playerSize.x, groundedSkin);
         //marker.SetActive(false);
-        Color tmp = marker.GetComponent<SpriteRenderer>().color;
-        tmp.a = 0f;
-        marker.GetComponent<SpriteRenderer>().color = tmp;
-
+        if (marker != null)
+        {
+            Color tmp = marker.GetComponent<SpriteRenderer>().color;
+            tmp.a = 0f;
+            marker.GetComponent<SpriteRenderer>().color = tmp;
+        }
         SetPositionNotOverViewPort();
     }
 
@@ -90,7 +92,10 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            Command();
+            if (Dog.instance != null)
+            {
+                Command();
+            }
         }
     }
 
