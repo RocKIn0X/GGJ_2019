@@ -23,6 +23,8 @@ public class MovingBlock : MonoBehaviour
     {
         traveled = 0;
         rb = GetComponent<Rigidbody2D>();
+        Physics2D.IgnoreLayerCollision(8, 8);
+
     }
 
     // Update is called once per frame
@@ -37,7 +39,6 @@ public class MovingBlock : MonoBehaviour
         {
             isTriggered = false;
         }
-        Physics2D.IgnoreLayerCollision(8, 8);
     }
     void FixedUpdate()
     {
