@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
             tmp.a = 0f;
             marker.GetComponent<SpriteRenderer>().color = tmp;
         }
-        SetPositionNotOverViewPort();
+        // SetPositionNotOverViewPort();
     }
 
     // Update is called once per frame
@@ -122,7 +122,7 @@ public class PlayerController : MonoBehaviour
         Flip(dirHorizontal);
         Climbing();
         Jumping();
-        transform.position = new Vector3(Mathf.Clamp(transform.position.x, xScreenMin, xScreenMax), transform.position.y, transform.position.z);
+        //transform.position = new Vector3(Mathf.Clamp(transform.position.x, xScreenMin, xScreenMax), transform.position.y, transform.position.z);
     }
 
     void SetPositionNotOverViewPort()
@@ -216,5 +216,10 @@ public class PlayerController : MonoBehaviour
             tmp.a = 0f;
             marker.GetComponent<SpriteRenderer>().color = tmp;
         }
+    }
+
+    public bool IsPlayerFaceRight ()
+    {
+        return faceRight;
     }
 }
