@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4065601085653677148}
   - component: {fileID: 6579098672095834270}
+  - component: {fileID: 3185951672989566850}
   m_Layer: 0
   m_Name: BG3
   m_TagString: Untagged
@@ -25,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1849799371529214583}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.421067, y: -0.38292995, z: 2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 2, y: 0.262, z: 2}
+  m_LocalScale: {x: 1.16052, y: 1.16052, z: 1.16052}
   m_Children: []
   m_Father: {fileID: 6211698634573751014}
   m_RootOrder: 0
@@ -79,6 +80,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3185951672989566850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1849799371529214583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ce16ff1b29dce2428f19772d7444685, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  followCamera: {fileID: 0}
+  slow: 200
 --- !u!1 &1971947070349914826
 GameObject:
   m_ObjectHideFlags: 0
@@ -89,6 +104,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1356964050575631769}
   - component: {fileID: 4231942783750702709}
+  - component: {fileID: 5642969158431103599}
   m_Layer: 0
   m_Name: BG2
   m_TagString: Untagged
@@ -104,8 +120,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1971947070349914826}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3, y: -0.38292995, z: 1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 5.383, y: -0.193, z: 1}
+  m_LocalScale: {x: 1.1244199, y: 1.1244199, z: 1.1244199}
   m_Children: []
   m_Father: {fileID: 6211698634573751014}
   m_RootOrder: 1
@@ -158,6 +174,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5642969158431103599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1971947070349914826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ce16ff1b29dce2428f19772d7444685, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  followCamera: {fileID: 0}
+  slow: 50
 --- !u!1 &6629315633952308525
 GameObject:
   m_ObjectHideFlags: 0
