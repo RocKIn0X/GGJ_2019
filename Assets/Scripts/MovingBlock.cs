@@ -5,15 +5,20 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class MovingBlock : MonoBehaviour
 {
+    public GameObject switches;
+    private SwitchTriggered switchTriggered;
+
     private float traveled;
     private bool isTriggered;
     public float isVertical;
     public float isHoriontal;
     public float isPlus;
+    public float velo;
     public float distance;
     private Rigidbody2D rb;
 
     // Start is called before the first frame update
+
     void Start()
     {
         traveled = 0;
@@ -23,7 +28,8 @@ public class MovingBlock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey("q"))
+        switchTriggered = switches.GetComponent<SwitchTriggered>();
+        if (switchTriggered.isActivated)
         {
             isTriggered = true;
         }
@@ -38,8 +44,8 @@ public class MovingBlock : MonoBehaviour
         {
             if (traveled <= distance)
             {
-                traveled += 1;
-                rb.velocity = new Vector2(isPlus * 1 * isHoriontal, isPlus * 1 * isVertical);
+                traveled += velo;
+                rb.velocity = new Vector2(isPlus * velo * isHoriontal, isPlus * velo * isVertical);
             }
             else
             {
@@ -51,8 +57,8 @@ public class MovingBlock : MonoBehaviour
         {
             if (traveled >= 0)
             {
-                traveled -= 1;
-                rb.velocity = new Vector2(isPlus * -1 * isHoriontal, isPlus * -1 * isVertical);
+                traveled -= velo;
+                rb.velocity = new Vector2(isPlus * -velo * isHoriontal, isPlus * -velo * isVertical);
             }
             else
             {
