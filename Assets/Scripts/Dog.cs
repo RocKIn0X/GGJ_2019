@@ -48,7 +48,7 @@ public class Dog : MonoBehaviour
         faceRight = true;
         isFollow = true;
         isSit = false;
-        state = DogState.STAND;
+        state = DogState.FOLLOW;
 
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
@@ -60,24 +60,13 @@ public class Dog : MonoBehaviour
     {
         direction = (target.position.x - transform.position.x) > 0f ? 1 : -1;
 
-        /*
-        if (isFollow)
-        {
-            Debug.Log("Follow");
-            MoveToTarget();
-            Flip(direction);
-        } 
-        */
-
         switch (state)
         {
             case DogState.STAND:
-                CheckPlayerFromRay();
                 break;
             case DogState.FOLLOW:
                 MoveToTarget();
                 Flip(direction);
-                CheckPlayerFromRay();
                 break;
             case DogState.SIT:
                 break;
@@ -92,6 +81,14 @@ public class Dog : MonoBehaviour
     void MoveToTarget()
     {
         transform.position = Vector2.MoveTowards(transform.position, new Vector2(target.position.x, transform.position.y), speed * Time.deltaTime);
+        //Debug.Log(Vector2.Distance(transform.position, new Vector2(target.position.x, transform.position.y)));
+        if (Vector2.Distance(transform.position, new Vector2(target.position.x, transform.position.y)) < 0.05f)
+        {
+            Debug.Log(state);
+            isFollow = false;
+            anim.SetBool("Follow", false);
+            state = DogState.STAND;
+        }
     }
 
     void Flip(float dirHorizontal)
@@ -139,7 +136,6 @@ public class Dog : MonoBehaviour
             Debug.Log("Continue Follow");
             target = _target;
             state = DogState.FOLLOW;
-            //MoveToTarget();
             isFollow = true;
             anim.SetBool("Follow", isFollow);
         }
