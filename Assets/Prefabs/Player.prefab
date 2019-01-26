@@ -209,7 +209,7 @@ MonoBehaviour:
   climbingOffset: 0.1
   screenPadding: 0.5
   speedX: 7
-  jumpForce: 15
+  jumpForce: 12
   marker: {fileID: 0}
   groundLayer:
     serializedVersion: 2
