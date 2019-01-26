@@ -106,6 +106,14 @@ public class PlayerController : MonoBehaviour
         {
             rb.velocity = new Vector2(0, rb.velocity.y);
         }
+
+        Debug.Log(rb.velocity.y);
+        if (rb.velocity.y < -0.1f)
+        {
+            anim.SetBool("Jumping", false);
+        }
+        anim.SetFloat("SpeedY", rb.velocity.y);
+
         Flip(dirHorizontal);
         Climbing();
         Jumping();
@@ -173,6 +181,7 @@ public class PlayerController : MonoBehaviour
     {
         if (jumpRequest)
         {
+            anim.SetBool("Jumping", jumpRequest);
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             isOnGround = false;
             jumpRequest = false;
@@ -181,6 +190,7 @@ public class PlayerController : MonoBehaviour
         {
             Vector2 boxCenter = ((Vector2)transform.position + playerBoxOffset) + Vector2.down * (playerSize.y + boxSize.y) * 0.5f;
             isOnGround = (Physics2D.OverlapBox(boxCenter, boxSize, 0f, groundLayer) != null);
+            anim.SetBool("IsOnGround", isOnGround);
         }
     }
 
