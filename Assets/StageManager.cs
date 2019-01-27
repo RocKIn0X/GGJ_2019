@@ -43,6 +43,11 @@ public class StageManager : MonoBehaviour
             DogFinish = false;
             StartCoroutine(WinCoroutine());
         }
+
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 
     IEnumerator LoseCoroutine()
