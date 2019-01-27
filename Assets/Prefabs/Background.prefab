@@ -104,7 +104,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4065601085653677148}
   - component: {fileID: 6579098672095834270}
-  - component: {fileID: 1024801184}
+  - component: {fileID: 29166054}
   m_Layer: 0
   m_Name: BG3
   m_TagString: Untagged
@@ -120,8 +120,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1849799371529214583}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.253, y: 0.411, z: 2}
-  m_LocalScale: {x: 1.2127433, y: 1.1326675, z: 1.16052}
+  m_LocalPosition: {x: 1.221, y: 0.316, z: 2}
+  m_LocalScale: {x: 1.2150644, y: 1.1709646, z: 1.16052}
   m_Children: []
   m_Father: {fileID: 6211698634573751014}
   m_RootOrder: 0
@@ -174,7 +174,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1024801184
+--- !u!114 &29166054
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -198,7 +198,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1356964050575631769}
   - component: {fileID: 4231942783750702709}
-  - component: {fileID: 1024801183}
+  - component: {fileID: 29166053}
   m_Layer: 0
   m_Name: BG2
   m_TagString: Untagged
@@ -268,7 +268,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1024801183
+--- !u!114 &29166053
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
