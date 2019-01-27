@@ -112,7 +112,6 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(0, rb.velocity.y);
         }
 
-        Debug.Log(rb.velocity.y);
         if (rb.velocity.y < -0.1f)
         {
             anim.SetBool("Jumping", false);
