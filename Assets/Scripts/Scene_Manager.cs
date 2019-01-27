@@ -21,20 +21,20 @@ public class Scene_Manager : MonoBehaviour
 
     public void loadNewGame()
     {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void loadCredits()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene("Credit");
     }
 
     public void loadHowTo()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("HowToPlay");
     }
     public void loadMenu()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("Menu");
     }
 }

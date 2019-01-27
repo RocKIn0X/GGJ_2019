@@ -9,7 +9,6 @@ public class AnimateCutScene : MonoBehaviour
     //private AnimateSprite animateSprite1;
     public void Start()
     {
-
         //animateSprite1 = scene1.GetComponent<AnimateSprite>();
         StartCoroutine(playAnimation());
     }

@@ -15,6 +15,7 @@ public class BGController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        followCamera = GameObject.FindGameObjectWithTag("MainCamera");
         multiplier = 1;
         offset = transform.position - followCamera.transform.position;
         oldPosition = followCamera.transform.position;

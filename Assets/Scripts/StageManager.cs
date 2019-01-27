@@ -32,6 +32,13 @@ public class StageManager : MonoBehaviour
     {
         PlayerFinish = false;
         DogFinish = false;
+
+        /*
+        if (SceneManager.GetActiveScene().name == "Stage_1")
+        {
+            AudioManager.instance.Play("Alone");
+        }
+        */
     }
 
     // Update is called once per frame
@@ -63,8 +70,7 @@ public class StageManager : MonoBehaviour
         coverPanelAnim = coverPanel.GetComponent<Animator>();
         coverPanelAnim.SetTrigger("Win");
         yield return new WaitForSeconds(2.0f);
-        // Load next scene
-        Debug.Log("Load Next Scene");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void WinningGame()
