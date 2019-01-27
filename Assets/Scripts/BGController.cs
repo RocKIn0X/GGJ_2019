@@ -36,6 +36,6 @@ public class BGController : MonoBehaviour
 
         }
 
-        Debug.Log("followX " + followCamera.transform.position.x + " old x " + oldPosition.x + " multi " + multiplier);
+        // Debug.Log("followX " + followCamera.transform.position.x + " old x " + oldPosition.x + " multi " + multiplier);
     }
 }
