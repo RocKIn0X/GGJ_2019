@@ -84,13 +84,13 @@ public class PlayerController : MonoBehaviour
             IsOnLadder = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && (isOnGround || IsOnLadder))
+        if (Input.GetKeyDown(KeyCode.K) && (isOnGround || IsOnLadder))
         {
             jumpRequest = true;
             IsOnLadder = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.J))
         {
             if (Dog.instance != null)
             {
@@ -112,7 +112,6 @@ public class PlayerController : MonoBehaviour
             rb.velocity = new Vector2(0, rb.velocity.y);
         }
 
-        Debug.Log(rb.velocity.y);
         if (rb.velocity.y < -0.1f)
         {
             anim.SetBool("Jumping", false);
