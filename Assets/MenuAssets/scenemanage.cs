@@ -7,15 +7,15 @@ public class scenemanage : MonoBehaviour
 {
     public void startgame()
     {
-        SceneManager.LoadScene("cut1");
+        SceneManager.LoadScene(3);
     }
     public void howtoplay()
     {
-        SceneManager.LoadScene("HowToPlay");
+        SceneManager.LoadScene(1);
     }
     public void credit()
     {
-        SceneManager.LoadScene("Credit");
+        SceneManager.LoadScene(2);
     }
     public void mainmenu()
     {

@@ -32,6 +32,13 @@ public class StageManager : MonoBehaviour
     {
         PlayerFinish = false;
         DogFinish = false;
+
+        /*
+        if (SceneManager.GetActiveScene().name == "Stage_1")
+        {
+            AudioManager.instance.Play("Alone");
+        }
+        */
     }
 
     // Update is called once per frame
