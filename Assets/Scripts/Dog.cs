@@ -145,7 +145,7 @@ public class Dog : MonoBehaviour
     {
         if (collision.CompareTag("Warp"))
         {
-            if (Input.GetKeyDown(KeyCode.X))
+            if (Input.GetKeyDown(KeyCode.L))
             {
                 this.transform.position = collision.GetComponent<WarpHole>().GetDestination();
             }
