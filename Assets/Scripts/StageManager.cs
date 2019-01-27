@@ -63,8 +63,7 @@ public class StageManager : MonoBehaviour
         coverPanelAnim = coverPanel.GetComponent<Animator>();
         coverPanelAnim.SetTrigger("Win");
         yield return new WaitForSeconds(2.0f);
-        // Load next scene
-        Debug.Log("Load Next Scene");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void WinningGame()
